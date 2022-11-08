@@ -1,5 +1,10 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './buttonDialog.css';
+
+const ShowDialog = e =>  {
+  e.preventDefault();
+  alert("Apretaste el boton")
+}
 
 interface ButtonDialogProps {
   /**
@@ -19,9 +24,13 @@ interface ButtonDialogProps {
    */
   label: string;
   /**
+   * Text to display in the dialog
+   */
+   DialogContent: string;
+  /**
    * Optional click handler
    */
-  onClick?: () => void;
+  // onClick?: () => void
 }
 
 /**
@@ -35,14 +44,20 @@ export const ButtonDialog = ({
   ...props
 }: ButtonDialogProps) => {
   const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+  const buttonClicked = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    alert("Prueba");
+  }
+
   return (
-    <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
-      {...props}
-    >
-      {label} - Created by Paolita
-    </button>
+      <button
+          type="button"
+          className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+          style={{ backgroundColor }}
+          onClick={buttonClicked}
+          {...props}
+        >
+          {label}
+      </button>
   );
 };
